@@ -71,7 +71,6 @@ public class FlowerSalesServlet extends HttpServlet {
         jsonObject.put("detail",detail);
         jsonObject.put("type",type);
         resp.getWriter().write(jsonObject.toJSONString());
-        System.out.println(jsonObject.toJSONString());
     }
 
     @Override
