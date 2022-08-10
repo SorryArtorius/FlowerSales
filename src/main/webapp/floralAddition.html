@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉添加</title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<script>
+    $(function () {
+        var table = $("#floweInformation");
+        var str = "";
+        $.getJSON("flowerSalesServlet", {tag: "addFloweInformation"}, function (json) {
+           str += "<tr>";
+           str += "<td>花卉分类</td>";
+           str += "<td>";
+          for (var i = 0; i < json.type.length; i++) {
+              str += "<input type='radio' name='flowers' value='"+json.type[i].id+"'>"+json.type[i].name;
+          }
+           str += "</td>";
+           str += "</tr>";
+
+
+            str += "<tr>";
+            str += "<td>花卉名称</td>";
+            str += "<td><input type='text' name='flowerName'/></td>";
+            str += "</tr>";
+
+            str += "<tr>";
+            str += "<td>管理人</td>";
+            str += "<td><input type='text' name='manager'/></td>";
+            str += "</tr>";
+
+            str += "<tr>";
+            str += "<td>销售价格</td>";
+            str += "<td><input type='text' name='sellingPrice'/></td>";
+            str += "</tr>";
+
+            str += "<tr>";
+            str += "<td>进货日期</td>";
+            str += "<td><input type='text' name='purchaseDate'/></td>";
+            str += "</tr>";
+
+           table.append(str);
+
+        });
+    })
+</script>
+<body>
+<form action="flowerSalesServlet?tag=addFloweInformation" method="post">
+    <h2>花卉信息保存</h2>
+    <table id="floweInformation" border="1">
+    </table>
+    <input type='submit' value='保存信息'/>;
+</form>
+</body>
+</html>

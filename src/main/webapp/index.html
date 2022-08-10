@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉销售管理平台</title>
+    <script src="js/jquery-3.6.0.js"></script>
+
+
+    <script>
+        $(function () {
+            $.getJSON("flowerSalesServlet", {tag: "showFlowers"}, function (json) {
+                var tr = $("#showFlowers");
+                $("#showFlowers tr").remove();
+                var str = "";
+                for (var i = 0; i < json.detail.length; i++) {
+                    str += "<tr>"
+                    str += "<td>" + json.detail[i].id + "</td>";
+                    str += "<td>" + json.detail[i].type.name + "</td>";
+                    str += "<td>" + json.detail[i].name + "</td>";
+                    str += "<td>" + json.detail[i].manager + "</td>";
+                    str += "<td>" + json.detail[i].price + "</td>";
+                    str += "<td>" + json.detail[i].instore + "</td>";
+                    str += "</tr>"
+                }
+                tr.append(str);
+
+                var select = $("#detailType");
+                str ="";
+                str += " <option value='0' selected>显示所有花卉</option>";
+                for (var i = 0; i < json.type.length; i++) {
+                    str += " <option value='"+json.type[i].id + "'>"+json.type[i].name +" </option>";
+                }
+                select.append(str);
+            });
+        });
+
+        function searchForFlowers() {
+            var typeId = $("#detailType").val();
+            $.getJSON("flowerSalesServlet", { tag: "searchForFlowers", typeId: typeId }, function(json){
+                var tr = $("#showFlowers");
+                $("#showFlowers tr").remove();
+                var str = "";
+                for (var i = 0; i < json.detail.length; i++) {
+                    str += "<tr>"
+                    str += "<td>" + json.detail[i].id + "</td>";
+                    str += "<td>" + json.detail[i].type.name + "</td>";
+                    str += "<td>" + json.detail[i].name + "</td>";
+                    str += "<td>" + json.detail[i].manager + "</td>";
+                    str += "<td>" + json.detail[i].price + "</td>";
+                    str += "<td>" + json.detail[i].instore + "</td>";
+                    str += "</tr>"
+                }
+
+
+                tr.append(str);
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <p>请选择花卉分类<select id="detailType"></select><button type="button" onclick="searchForFlowers()">搜索花卉信息</button> <a href="flowerSalesServlet?tag=sendAddFloweInformation">添加一个新花花卉品种</a> </p>
+<table border="1" id="showFlowers">
+    <th>花卉编号</th>
+    <th>花卉分类</th>
+    <th>花卉名称</th>
+    <th>管理人</th>
+    <th>销售金额</th>
+    <th>进货日期</th>
+</table>
+</div>
+</body>
+</html>

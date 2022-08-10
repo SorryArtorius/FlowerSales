@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.j16.dao.DetailDao">
+        <resultMap id="DetailMapper" type="detail">
+            <association property="type" column="tid" select="com.j16.dao.TypeDao.getType"/>
+        </resultMap>
+    <select id="showFlowers" resultMap="DetailMapper">
+        select * from Detail
+    </select>
+
+    <select id="getFlowers"  parameterType="int" resultMap="DetailMapper">
+        select * from Detail <where>
+        tid = #{typeId}
+    </where>
+    </select>
+
+
+    <insert id="addDetail" parameterType="detail">
+        insert into detail set name=#{name},manager=#{manager},instore=#{instore}
+        , price=#{price},tid=#{tid}
+    </insert>
+</mapper>
