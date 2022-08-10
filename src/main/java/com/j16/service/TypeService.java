@@ -1,5 +1,7 @@
 package com.j16.service;
 
+import com.j16.pojo.Detail;
+
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -19,4 +21,6 @@ public interface TypeService {
      * @return
      */
     List<Type> getTypeList();
+
+
 }

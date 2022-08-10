@@ -50,4 +50,6 @@ public class DetailServiceImpl implements DetailService {
         }
         return 0;
     }
+
+
 }

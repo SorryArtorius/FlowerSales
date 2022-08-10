@@ -15,7 +15,11 @@
                 for (var i = 0; i < json.detail.length; i++) {
                     str += "<tr>"
                     str += "<td>" + json.detail[i].id + "</td>";
-                    str += "<td>" + json.detail[i].type.name + "</td>";
+                    for (var j = 0; j < json.type.length; j++) {
+                        if (json.detail[i].tid == json.type[j].id)
+                        str += "<td>" + json.type[j].name + "</td>";
+                        break;
+                    }
                     str += "<td>" + json.detail[i].name + "</td>";
                     str += "<td>" + json.detail[i].manager + "</td>";
                     str += "<td>" + json.detail[i].price + "</td>";

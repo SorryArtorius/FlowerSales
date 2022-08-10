@@ -9,11 +9,13 @@
 
         <select id="getType"  resultType="Type">
             select * from type <where>
-            id = #{tid}
+            id = #{id}
         </where>
         </select>
 
         <select id="getTypeList" resultType="type">
             select * from type;
         </select>
+
+
 </mapper>

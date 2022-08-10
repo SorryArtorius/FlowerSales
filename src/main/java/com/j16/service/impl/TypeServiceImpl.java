@@ -2,6 +2,7 @@ package com.j16.service.impl;
 
 import com.j16.dao.DetailDao;
 import com.j16.dao.TypeDao;
+import com.j16.pojo.Detail;
 import com.j16.service.TypeService;
 import com.j16.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -37,4 +38,5 @@ public class TypeServiceImpl implements TypeService {
         }
         return null;
     }
+
 }

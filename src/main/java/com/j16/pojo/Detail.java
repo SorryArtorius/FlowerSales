@@ -66,4 +66,18 @@ public class Detail {
     public void setType(Type type) {
         this.type = type;
     }
+
+
+    @Override
+    public String toString() {
+        return "Detail{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", manager='" + manager + '\'' +
+                ", instore='" + instore + '\'' +
+                ", price=" + price +
+                ", tid=" + tid +
+                ", type=" + type +
+                '}';
+    }
 }

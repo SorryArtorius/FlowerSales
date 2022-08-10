@@ -22,4 +22,7 @@ public interface DetailDao {
 
 
     int addDetail(Detail detail);
+
+
+
 }

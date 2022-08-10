@@ -28,4 +28,14 @@ public class Type {
     public void setOther(String other) {
         this.other = other;
     }
+
+
+    @Override
+    public String toString() {
+        return "Type{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", other='" + other + '\'' +
+                '}';
+    }
 }

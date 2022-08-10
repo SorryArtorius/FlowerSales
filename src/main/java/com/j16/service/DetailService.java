@@ -21,4 +21,6 @@ public interface DetailService {
 
 
     int addDetail(Detail detail);
+
+
 }

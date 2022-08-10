@@ -67,8 +67,9 @@ public class FlowerSalesServlet extends HttpServlet {
          */
         List<Type> type = new TypeServiceImpl().getTypeList();
         JSONObject jsonObject = new JSONObject();
+
         jsonObject.put("detail",detail);
-//        jsonObject.put("type",type);
+        jsonObject.put("type",type);
         resp.getWriter().write(jsonObject.toJSONString());
         System.out.println(jsonObject.toJSONString());
     }
