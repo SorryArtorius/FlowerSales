@@ -10,16 +10,11 @@
         $(function () {
             $.getJSON("flowerSalesServlet", {tag: "showFlowers"}, function (json) {
                 var tr = $("#showFlowers");
-                $("#showFlowers tr").remove();
                 var str = "";
                 for (var i = 0; i < json.detail.length; i++) {
                     str += "<tr>"
                     str += "<td>" + json.detail[i].id + "</td>";
-                    for (var j = 0; j < json.type.length; j++) {
-                        if (json.detail[i].tid == json.type[j].id)
-                        str += "<td>" + json.type[j].name + "</td>";
-                        break;
-                    }
+                    str += "<td>" + json.detail[i].type.name + "</td>";
                     str += "<td>" + json.detail[i].name + "</td>";
                     str += "<td>" + json.detail[i].manager + "</td>";
                     str += "<td>" + json.detail[i].price + "</td>";
@@ -42,12 +37,18 @@
             var typeId = $("#detailType").val();
             $.getJSON("flowerSalesServlet", { tag: "searchForFlowers", typeId: typeId }, function(json){
                 var tr = $("#showFlowers");
-                $("#showFlowers tr").remove();
+                $("#showFlowers tr:gt(0)").remove();
                 var str = "";
                 for (var i = 0; i < json.detail.length; i++) {
                     str += "<tr>"
                     str += "<td>" + json.detail[i].id + "</td>";
-                    str += "<td>" + json.detail[i].type.name + "</td>";
+                    for (var j = 0; j < json.type.length; j++) {
+                        if (json.detail[i].tid === json.type[j].id) {
+                            str += "<td>" + json.type[j].name + "</td>";
+                            break;
+                        }
+                    }
+                    // str += "<td>" + json.detail[i].type.name + "</td>";
                     str += "<td>" + json.detail[i].name + "</td>";
                     str += "<td>" + json.detail[i].manager + "</td>";
                     str += "<td>" + json.detail[i].price + "</td>";

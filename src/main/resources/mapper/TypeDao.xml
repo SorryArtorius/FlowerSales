@@ -8,13 +8,13 @@
     </resultMap>
 
         <select id="getType"  resultType="Type">
-            select * from type <where>
+            select * from `type` <where>
             id = #{id}
         </where>
         </select>
 
         <select id="getTypeList" resultType="type">
-            select * from type;
+            select * from `type`;
         </select>
 
 

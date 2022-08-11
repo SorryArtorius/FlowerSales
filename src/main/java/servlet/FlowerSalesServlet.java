@@ -1,6 +1,8 @@
 package servlet;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.j16.pojo.Detail;
 import com.j16.service.impl.DetailServiceImpl;
 import com.j16.service.impl.TypeServiceImpl;
@@ -36,9 +38,12 @@ public class FlowerSalesServlet extends HttpServlet {
                 showFlowers(resp);
             }else {
                 List<Detail> detail = new DetailServiceImpl().getFlowers(typeId);
+                List<Type> type = new TypeServiceImpl().getTypeList();
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("detail",detail);
+                jsonObject.put("type",type);
                 resp.getWriter().write(jsonObject.toJSONString());
+                System.out.println(jsonObject.toJSONString());
             }
 
         }else if ("sendAddFloweInformation".equals(tag)) {
@@ -57,11 +62,12 @@ public class FlowerSalesServlet extends HttpServlet {
     /**
      * 显示所有鲜花
      */
-    private static void showFlowers(HttpServletResponse resp) throws IOException {
+    private void showFlowers(HttpServletResponse resp) throws IOException {
         /**
          * 返回花的信息
          */
         List<Detail> detail = new DetailServiceImpl().showFlowers();
+        detail.forEach(System.out::println);
         /**
          * 返回花种类信息
          */
@@ -70,7 +76,13 @@ public class FlowerSalesServlet extends HttpServlet {
 
         jsonObject.put("detail",detail);
         jsonObject.put("type",type);
-        resp.getWriter().write(jsonObject.toJSONString());
+        String s  = jsonObject.toJSONString();
+        System.out.println(s);
+
+        /**
+         * JSONObject重复引用某个数据时会使用$占位 导致数据undefined 解决方式就是转换时加序列化
+         */
+        resp.getWriter().write(JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect));
     }
 
     @Override
