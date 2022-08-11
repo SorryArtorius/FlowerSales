@@ -76,8 +76,6 @@ public class FlowerSalesServlet extends HttpServlet {
 
         jsonObject.put("detail",detail);
         jsonObject.put("type",type);
-        String s  = jsonObject.toJSONString();
-        System.out.println(s);
 
         /**
          * JSONObject重复引用某个数据时会使用$占位 导致数据undefined 解决方式就是转换时加序列化
